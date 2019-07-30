@@ -1,0 +1,14 @@
+{
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": false,
+    "python.testing.promptToConfigure": false,
+    "python.pythonPath": "C:\\Program Files\\Python37\\python.exe",
+    "cSpell.words": [
+        "engern",
+        "engerner"
+    ]
+}
