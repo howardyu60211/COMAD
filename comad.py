@@ -26,16 +26,22 @@ def add (text) :
     while len(text) % 8 != 0:
         text += ' '
     return text
+# ... #
+
 # func : lock #
 def lock (text) :
     key=b'howardishandsome'
     des = DES.new(key, DES.MODE_ECB)  # 建立一個DES例項
     padded_text = add(text)
     encrypted_text = des.encrypt(padded_text.encode('utf-8'))  # 加密
+# ... #
+
 # func : unlock #
 def unlock (text) :
     plain_text = DES.decrypt(text).decode().rstrip(' ')  # 解密
-    # class : print message #
+# ... #
+
+# class : print message #
 class close_mb :
     def __init__(self, msg="", height=115, width=200, title="", color="white") :
         # 建立物件 #
@@ -169,6 +175,7 @@ while True:
         logging.info("6)cleanallmember")
     # ... #
 
+    #logging info#
     elif code.lower() == "logging system" :
         logging.basicConfig(level=logging.DEBUG)
         print("============================================= logging system ================================================")
@@ -177,13 +184,14 @@ while True:
         logging.warning(" My name is warmingsystem , I will print warning to user .")
         logging.error("   My name is  errorsystem  , I will print  error  to user .")
         logging.critical("My name is criticalsystem, if you are toppest, you will see me soon!")
-
-    # print password#
+    # logging info #
+    
+    # print password #
     elif code.lower() == "password":
         logging.info(pd)
     # ... #
 
-    # Permission#
+    # Permission #
     elif code.lower() == "toppest":
         try:
             sound = pygame.mixer.Sound("..\system\media\windows sound\Windows Permission.wav")
@@ -195,7 +203,7 @@ while True:
         toppest = True
     # ... #
 
-    ### upgrade ###
+    # upgrade #
     elif code.lower() == "upgrade" and toppest == True and upgradebefore == False:
         logging.info("__init__()...")
         time.sleep(random.randint(2, 5))
@@ -223,7 +231,7 @@ while True:
         logging.info("finish upgrade before")
     # ... #
 
-    ### member ###
+    # member #
     elif code.lower() == "addmember":
         namenumber = input("input name >>>")
         levelcode = input("input grade (1>2>3>4)>>>")
@@ -266,5 +274,9 @@ while True:
     else:
         logging.info('"' + code + '" 不是內部或外部命令、可執行的程式或批次檔。')
     # ... #
+
+    # next line #
     print("")
+    # ... #
+
 # ... #
