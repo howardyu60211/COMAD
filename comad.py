@@ -1,5 +1,6 @@
 # 匯入 #
 import logging
+from Crypto.Cipher import DES
 import os
 import random
 import time
@@ -20,8 +21,22 @@ logging.basicConfig(
 pygame.mixer.init()
 # ... #
 
-# class : print message #
-class Own_mb :
+# func : add #
+def add (text) :
+    while len(text) % 8 != 0:
+        text += ' '
+    return text
+# func : lock #
+def lock (text) :
+    key=b'howardishandsome'
+    des = DES.new(key, DES.MODE_ECB)  # 建立一個DES例項
+    padded_text = add(text)
+    encrypted_text = des.encrypt(padded_text.encode('utf-8'))  # 加密
+# func : unlock #
+def unlock (text) :
+    plain_text = DES.decrypt(text).decode().rstrip(' ')  # 解密
+    # class : print message #
+class close_mb :
     def __init__(self, msg="", height=115, width=200, title="", color="white") :
         # 建立物件 #
         self.root = Tk()
@@ -87,7 +102,8 @@ def login(pd):
                 except Exception as errmsg:
                     logging.error(errmsg)
                 logging.warning("wrong")
-                logging.warning("%s次後鎖定", times)
+                if time != 0 :
+                    logging.warning("%s次後鎖定", times)
                 if times == 0:
                     logging.warning("已鎖定,請" + str(locktime) + "後重新登入")
                     for i in range(locktime, 0, -1):
@@ -119,11 +135,11 @@ def login(pd):
 upgradecode = 0
 upgradebefore = False
 toppest = False
-cmdpath = str(os.getcwd())
-levela = "Top administrator"
-levelb = "administrator"
-levelc = "VIP member"
-leveld = "member"
+cmd_path = str(os.getcwd())
+level_a = "Top administrator"
+level_b = "administrator"
+level_c = "VIP member"
+level_d = "member"
 levelcode = 0
 member = {"howard", "the highest administrator"}
 pd = "01928374655647382910"
@@ -131,10 +147,11 @@ pd = "01928374655647382910"
 
 # main #
 login(pd)
+print("==================================================================")
 print("comad [版本 10.0.17134.590]")
 print("(c) 2019 howard. 著作權所有，並保留一切權利。")
 while True:
-    code = str(input("F^B %s >" % cmdpath))
+    code = str(input("F^B %s >" % cmd_path))
 
     # signout #
     if "signout" == code.lower():
@@ -211,11 +228,11 @@ while True:
         namenumber = input("input name >>>")
         levelcode = input("input grade (1>2>3>4)>>>")
         if levelcode == "1":
-            member = dict(zip([namenumber], [levela]))
+            member = dict(zip([namenumber], [level_a]))
         elif levelcode == "2":
-            member = dict(zip([namenumber], [levelb]))
+            member = dict(zip([namenumber], [level_b]))
         elif levelcode == "3":
-            member = dict(zip([namenumber], [levelc]))
+            member = dict(zip([namenumber], [level_c]))
         else:
             logging.warning("IndexError")
         OrderedDict(sorted(member.items()))
@@ -228,7 +245,7 @@ while True:
 
     # shutdown #
     elif code.lower() == "goodbye":
-        if Own_mb("quit?") == True:
+        if close_mb("quit?") == True:
             try:
                 sound = pygame.mixer.Sound("..\system\media\windows sound\Windows Shutdown.wav")
                 sound.play()
@@ -247,7 +264,7 @@ while True:
 
     # unknown code #
     else:
-        logging.info('"' + code + '"不是內部或外部命令、可執行的程式或批次檔。')
+        logging.info('"' + code + '" 不是內部或外部命令、可執行的程式或批次檔。')
     # ... #
     print("")
 # ... #
